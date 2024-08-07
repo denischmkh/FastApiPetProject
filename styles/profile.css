@@ -1,0 +1,141 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-image: url('./img/profile_bg.gif');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.sayhi {
+  position: relative;
+  height: auto;
+  width: 300px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top: 170px;
+  margin-left: 450px;
+  border: 2px solid black;
+  border-top-right-radius: 150px;
+  border-bottom-right-radius: 150px;
+  border-bottom-left-radius: 150px;
+  background-color: #c2c0b4;
+  text-align: center;
+}
+
+#sayhi-text {
+  margin-top: 30px;
+  font-style: italic;
+}
+
+.basket {
+  width: 400px;
+  height: auto;
+  margin-left: 1130px;
+  text-align: center;
+  color: white;
+  text-shadow: 2px 2px 2px black;
+}
+
+.basket-item {
+  border-top: 2px solid white;
+  text-shadow: 2px 2px 2px black;
+  width: 400px;
+  height: 175px;
+  text-align: center;
+  padding-top: 10px;
+}
+
+#title {
+  margin-bottom: 10px;
+}
+
+#span {
+  font-size: 30px;
+}
+
+#count {
+  height: 35px;
+  width: 70px;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 10px;
+  font-size: 20px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+#sum {
+  font-size: 25px;
+  margin-bottom: 5px;
+}
+
+#full-sum {
+  font-size: 25px;
+  margin-bottom: 5px;
+}
+
+#btn {
+  font-size: 30px;
+  border: 3px solid red;
+  background-color: white;
+  color: red;
+  border-radius: 20px;
+  width: 180px;
+}
+
+#btn:hover {
+  background-color: red;
+  color: white;
+  transition: 0.2s;
+}
+
+.create-order {
+  height: 200px;
+  width: 400px;
+  text-align: center;
+  padding-top: 20px;
+  border-top: 2px solid white;
+}
+
+#text-order {
+  font-size: 35px;
+  margin-top: 30px;
+}
+
+#success_btn {
+  margin-top: 20px;
+  font-size: 35px;
+  border: 3px solid #2bc42b;
+  background-color: white;
+  color: #2bc42b;
+  border-radius: 20px;
+  width: 300px;
+}
+
+#success_btn:hover {
+  color: white;
+  background-color: #2bc42b;
+  transition: 0.2s;
+}
+
+#back-btn-link {
+    color: white;
+    text-decoration: none;
+    font-size: 70px;
+    font-decoration: bold;
+    position: absolute;
+    top: 0px;
+    left: 10px;
+    position: fixed;
+}
+
+#back-btn-link:hover {
+    color: red;
+    transition: 0.2s;
+}

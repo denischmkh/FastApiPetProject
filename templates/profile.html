@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/styles/profile.css">
+  <title>Breaking Blad - Profile</title>
+</head>
+<body>
+  <a href="/" id="back-btn-link" title="Меню"><</a>
+  <div class="sayhi">
+    <h1 id="sayhi-text">Hello {% if user %} {{ user.username }} {% endif %}, and welcome to the Los Pollos Hermanos family!!!</h1>
+  </div>
+  <div class="basket">
+    <h1>Корзина:</h1>
+    {% if basket %}
+    {% for elem in basket %}
+      <div class="basket-item">
+        <h1 id="title">{{elem.title}}</h1>
+        <div>
+          <span id="span">Количество: </span>
+          <input type="number" value="{{elem.quantity}}" id="count" disabled>
+        </div>
+        <h1 id="sum">Сумма: {{elem.full_sum}} $</h1>
+        <form action="/delete_item/{{elem.id}}" method="post">
+          <button type="submit" name="button" id="btn" class="delete-from-basket-btn">Удалить</button>
+        </form>
+      </div>
+    {% endfor %}
+
+    {% endif %}
+    <div class="create-order">
+          <b id="text-order">Оформить заказ</b>
+          <h1 id="full-sum">Полная сумма: {{full_summa}}$</h1>
+          <form class="create-order-btn" action="/create_order" method="post">
+            <button type="submit" name="button" id="success_btn">Оформить заказ</button>
+          </form>
+        </div>
+  </div>
+<script>
+var buttons = document.querySelectorAll(".delete-from-basket-btn");
+
+buttons.forEach(function(button) {
+  button.addEventListener("click", function(event) {
+    event.preventDefault(); // Предотвращаем стандартное поведение кнопки
+    var form = button.closest("form"); // Ищем ближайшую форму, содержащую кнопку
+    var url = form.getAttribute("action");
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('POST', url, true);
+
+
+    xhr.onload = function() {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        // Успешное завершение запроса
+        var formParent = form.closest(".basket-item"); // Находим родительский блок с классом "basket-item"
+        if (formParent) {
+          formParent.remove(); // Удаляем родительский блок
+        }
+      } else {
+        // Обработка ошибок, если необходимо
+        console.error('Request failed with status', xhr.status);
+      }
+    };
+
+    xhr.onerror = function() {
+      // Обработка ошибок, если необходимо
+      console.error('Request failed');
+    };
+
+    xhr.send();
+
+    var xhrGet = new XMLHttpRequest();
+    xhrGet.open('GET', '/auth/get_full_sum', true);
+    xhrGet.onload = function() {
+      var response = JSON.parse(xhrGet.responseText);
+      var fullSum = response.full_sum;
+
+      var fullSumElement = document.getElementById('full-sum');
+      fullSumElement.textContent = 'Полная сумма: ' + fullSum + '$';
+     };
+     xhrGet.send()
+  });
+});
+  document.getElementById('success_btn').addEventListener('click', function(event) {
+            var fullSumElement = document.getElementById('full-sum');
+            var fullSumText = fullSumElement.textContent || fullSumElement.innerText;
+            var fullSumValue = fullSumText.replace('Полная сумма: ', '').trim();
+
+            if (fullSumValue === '0$') {
+                event.preventDefault();
+                alert("Корзина пустая");
+            }
+        });
+</script>
+</body>

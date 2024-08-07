@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/styles/auth.css">
+  <title>Breaking Blad - Registration</title>
+</head>
+<body>
+  <a href="/" id="back-btn-link" title="Меню"><</a>
+    <div class="registration-form">
+      <form class="register" action="/auth/register" method="post">
+        <label id="label">Регистрация</label>
+        <input type="text" id="input-lable" name="username" maxlength="15" placeholder="Придумай имя пользователя">
+        <input type="password" id="input-lable" name="password1" placeholder="Придумай пароль">
+        <input type="password" id="input-lable" name="password2" placeholder="Повтори пароль">
+        <button type="submit" id="button">Зарегистрироваться</button>
+      </form>
+      <a href="/auth/login" id="resend">Есть аккаунт? Так заходи!</a>
+    </div>
+</body>
+</html>

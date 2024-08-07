@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/styles/main_styles.css">
+  <title>Breaking Blad</title>
+</head>
+<body>
+  <div class="navbar">
+    <div class="">
+      <a href="/" id="main_link">
+          <div id="main_img"></div>
+      </a>
+    </div>
+
+    <div class="links">
+      <a href="https://t.me/+OojfsOs18nYyMjMy" target="_blank" id="tg_link">Telegram</a>
+      <a href="#" id="contact">+380999991488</a>
+    </div>
+    {% if not user %}
+      <a href="/auth/login" id="login">Войти</a>
+    {% else %}
+      <img src="styles/img/profile.png" id="profile-photo">
+      <select id="selectMenu" class="form-select">
+          <option selected disabled></option>
+          <option value="1" id="select-item">Профиль</option>
+          <option value="2" id="select-item">Выйти</option>
+      </select>
+    {% endif %}
+  </div>
+  <div class="container">
+    <div class="categorys">
+      <a href="/" id="category">Все сразу!</a>
+      {% for category in categorys %}
+      <a href="/?category_id={{category.id}}" id="category">{{ category.title }}</a>
+      {% endfor %}
+    </div>
+    <div class="items">
+      {% for product in products %}
+      <div class="item">
+          <img src="styles/img/{{product.image}}" id="image">
+          <a href="/product_info/{{product.id}}" id="title">{{product.title}}</a>
+          <h2 id="price">{{ product.price }} $</h2>
+        <form action="/add_to_basket/{{product.id}}" method="post">
+          <button type="submit" name="button" id="button" class="add-to-cart-button">Добавить в корзину</button>
+        </form>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+<script>
+    document.getElementById("selectMenu").onchange = function() {
+        var selectedValue = this.value;
+        if (selectedValue === "1") {
+            window.location.href = "/auth/profile";
+        } else if (selectedValue === "2") {
+            window.location.href = "/auth/logout";
+        }
+    };
+  var buttons = document.querySelectorAll('.add-to-cart-button');
+    buttons.forEach(function(button) {
+      button.addEventListener('click', function(event) {
+        event.preventDefault();
+        var form = button.form;
+        var url = form.getAttribute('action');
+        console.log(url);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', url, true);
+        xhr.send();
+        });
+        });
+
+</script>
+</body>
+</html>
